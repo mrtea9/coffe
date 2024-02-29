@@ -13,7 +13,8 @@ menu = Menu()
 while coffe_machine:
 
     while True:
-        choice = input("What would you like? (espresso/latte/cappuccino): ")
+        options = menu.get_items()
+        choice = input(f"What would you like? {options}: ")
         if choice.lower() == "off":
             exit()
         elif choice.lower() == "report":
@@ -25,10 +26,8 @@ while coffe_machine:
             break
 
     drink = menu.find_drink(choice)
-    if machine.is_resource_sufficient(drink):
-        if money.make_payment(drink.cost):
-            machine.make_coffee(drink)
+    if machine.is_resource_sufficient(drink) and money.make_payment(drink.cost):
+        machine.make_coffee(drink)
 
-    machine.report()
-    money.report()
+
 
